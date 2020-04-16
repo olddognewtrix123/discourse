@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+ <html>   
+ <head>
+ <title>WebRABIT Test Case Writer</title>
+ <style>
+  body
+  {
+    padding-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:blue; 
+    color: white;
+  }
+  input {
+    background-color: light-grey;
+  }
+  mainDiv
+  {
+    text-align:left; 
+    color: white; 
+    margin:auto;
+  }
+  li
+  {
+    display: inline-block;
+    float: left;
+    width: 100%;
+  }
+  li:last-child
+  {
+    margin-bottom: 1em;
+  }
+  #deleteButton
+  {
+    height:15px; 
+    width: 50px; 
+    background-color:blue;
+    color: white;
+    font-size: 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+  }
+  #dataSaveToggle
+  {
+    float: right;
+  }
+  #showdata
+  {
+    overflow-y: scroll;
+  }
+  #selectoption
+  {
+    padding-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  p
+  {
+    margin-top: .5em;
+  }
+  button
+  {
+    margin-top: .5em;
+    border-radius: 5px;
+  }
+  input[type=text]
+  {
+    border-radius: 5px;
+  }
+  </style>
+  </head>
+  <body >
+    <h1>WebRABIT Test Case Writer</h1>
+    <div id="mainDiv" class="mainDiv" >
+
+        <button onclick="help()" id = "help" style="height:25px; width: 150px; background-color:blue;color: white" >User Guide</button>
+        <button   id = "loadExisting" onclick="checkData()" style="height:25px; width: 150px; background-color:blue;color: white" >Load Existing</button>
+        <button   id = "createNew" onclick="CreateNew()" style="height:25px; width: 150px; background-color:blue;color: white" >Create New</button>
+
+        <div id="showdata" style="background-color: white; width:375px; height:100px; display: none;margin: 10px;border-radius: 5px;">
+            <label id="selectdb" style="color: black;">Available sets of test cases:</label>
+            <ul id="allTests" style="color: black;"></ul>
+        </div>
+
+        <br>
+        <div id="dcalc">
+            
+            <form style="margin-top: 10px" > 
+                Parameter filelist name: 			<!-- This is the name of the particular set of test cases - technically known as the "test case parameters list" -->
+		<div id="dataSaveToggle" style="display:none">Data saves 'onblur'</div>
+                <input type="text" name="paramFileListName" id="paramFileListName"  style="width:375px; height:30px; " readonly>
+                <br><br>
+		<p>What is the requirement?: </p>			<!-- This is the name of the particular set of test cases - technically known as the "test case parameters list" -->
+                <input type="text" name="req"  id="req" onblur = "saveData()" style=" color: black; width:550px; height:60px; border:0px" 
+            </form>
+
+            <!-- Roles -->
+	    <form>
+	    <p >What system roles does this requirement affect?: </p>
+	    <input type="text" name="role" id="role"  style=" color: black; width:550px; border:0px"> 
+	    </form>
+	    <button onclick="addRole()" id = "addRole"  style="height:25px; width: 150px; background-color:blue;color: white" >Add Role</button>
+	    <br><br>
+	    <label id="rolesSelectedLabel" style="height:25px; width: 150px; background-color:blue;color: white; display:none;">Roles:</label>
+	    <ul id="allRoles"></ul>
+
+	    <!-- Preconditions -->			
+	    <form>
+		<p >What preconditions affect the outcome of this test?: </p> 
+   		<input type="text" name="precondition" id="precondition" style="color: black; width:550px; border:0px">
+	    </form>
+	    <button onclick="addPrecon()" id = "addPrecon" style="height:25px; width: 150px; background-color:blue;color: white" >Add Precondition</button>
+	    <br><br>
+	    <label id="preconditionsSelectedLabel" style="height:25px; width: 150px; background-color:blue;color: white; display:none;">Preconditions:</label>
+            <ul id="allPreconditions"></ul>
+
+	    <!-- Testing Goal -->
+	    <form>
+		<p >What is the testing goal for the component under test?: </p>
+   		<input type="text" name="goal" id="goal" onblur = "saveData()" style="color: black; width:550px; height:60px; border:0px" >
+	    </form>
+
+        <!-- Data Types -->
+        <form id="rb" name="radiobuttonsform">
+          <p >What type of data are the boundary conditions? </p>
+          <input type="radio" name="dataType" id="dataTypeNone" onclick="getRadioButtonSelected()" value="none" checked> None
+          <input type="radio" name="dataType" id="dataTypeNumber" onclick="getRadioButtonSelected()" value="number"> Number
+          <input type="radio" name="dataType" id="dataTypeDate" onclick="getRadioButtonSelected()" value="date"> Date
+          <input type="radio" name="dataType" id="dataTypeAlpha" onclick="getRadioButtonSelected()" value="alpha"> Alpha or Special Characters
+        </form> 
+        <div id="minmaxdiv" style="display: none">
+          <p >What is the minimum boundary value?: </p>
+          <input type="text" name="min" id="min" onblur = "saveData()" style="color: black; width:150px; border:0px; " >
+          <p >What is the maximum boundary value?: </p>
+          <input type="text" name="max" id="max" onblur = "saveData()" style="color: black; width:150px; border:0px; " >	
+        </div>
+
+        <!-- Testing Steps -->
+        <div id="allTestSteps">
+	  <ul id="allSteps" style="color: black;"></ul>
+        </div>
+        <button onclick="addEmptyStepForm()" id="addEmptyStep" style="height:25px; width: 150px; background-color:blue;color: white" >Add Test Step</button>
+        <button onclick="deleteStep()" id="deleteStep" style="height:25px; width: 150px; background-color:blue;color: white; visibility: hidden" >Delete Test Step</button>
+        <br><br>
+	
+        </div>
+
+	<div id="testCaseWritingDiv">
+          <button id="writeTestCases" onclick="writeTestCases()" style="height:30px; width: 500px; background-color:blue;color: white" >Create Test Cases!</button>
+          <br><br>
+          <p id="tempDisplayArea"></p>
+          <br><br>
+          <button id="exportTXT" onclick="exportToTXT()" style="display: none;height:25px; width: 150px; background-color:blue;color: white;" >Export to .txt</button>			
+		  <button id="exportCSV" onclick="exportToCSV()" style="display: none;height:25px; width: 150px; background-color:blue;color: white;" >Export to .csv</button>
+		</div>
+		
+	</div>
+    <script src="db.js"></script>
+  </body>
+</html>				
+
+					
