@@ -7,8 +7,8 @@
   {
     padding-left: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color:blue; 
-    color: white;
+    background-color:#dcdcdc; 
+    color: black;
   }
   input {
     background-color: light-grey;
@@ -16,7 +16,7 @@
   mainDiv
   {
     text-align:left; 
-    color: white; 
+    color: black; 
     margin:auto;
   }
   li
@@ -33,8 +33,8 @@
   {
     height:15px; 
     width: 50px; 
-    background-color:blue;
-    color: white;
+    background-color:#dcdcdc;
+    color: black;
     font-size: 10px;
     margin-left: 5px;
     border-radius: 5px;
@@ -71,9 +71,9 @@
     <h1>Discourse Test Case Writer</h1>
     <div id="mainDiv" class="mainDiv" >
 
-        <button onclick="help()" id = "help" style="height:25px; width: 150px; background-color:blue;color: white" >User Guide</button>
-        <button   id = "loadExisting" onclick="checkData()" style="height:25px; width: 150px; background-color:blue;color: white" >Load Existing</button>
-        <button   id = "createNew" onclick="CreateNew()" style="height:25px; width: 150px; background-color:blue;color: white" >Create New</button>
+        <button onclick="help()" id = "help" style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >User Guide</button>
+        <button   id = "loadExisting" onclick="checkData()" style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >Load Existing</button>
+        <button   id = "createNew" onclick="CreateNew()" style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >Create New</button>
 
         <div id="showdata" style="background-color: white; width:375px; height:100px; display: none;margin: 10px;border-radius: 5px;">
             <label id="selectdb" style="color: black;">Available sets of test cases:</label>
@@ -97,9 +97,9 @@
 	    <p >What system roles does this requirement affect?: </p>
 	    <input type="text" name="role" id="role"  style=" color: black; width:550px; border:0px"> 
 	    </form>
-	    <button onclick="addRole()" id = "addRole"  style="height:25px; width: 150px; background-color:blue;color: white" >Add Role</button>
+	    <button onclick="addRole()" id = "addRole"  style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >Add Role</button>
 	    <br><br>
-	    <label id="rolesSelectedLabel" style="height:25px; width: 150px; background-color:blue;color: white; display:none;">Roles:</label>
+	    <label id="rolesSelectedLabel" style="height:25px; width: 150px; background-color:#dcdcdc;color: black; display:none;">Roles:</label>
 	    <ul id="allRoles"></ul>
 
 	    <!-- Preconditions -->			
@@ -107,9 +107,9 @@
 		<p >What preconditions affect the outcome of this test?: </p> 
    		<input type="text" name="precondition" id="precondition" style="color: black; width:550px; border:0px">
 	    </form>
-	    <button onclick="addPrecon()" id = "addPrecon" style="height:25px; width: 150px; background-color:blue;color: white" >Add Precondition</button>
+	    <button onclick="addPrecon()" id = "addPrecon" style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >Add Precondition</button>
 	    <br><br>
-	    <label id="preconditionsSelectedLabel" style="height:25px; width: 150px; background-color:blue;color: white; display:none;">Preconditions:</label>
+	    <label id="preconditionsSelectedLabel" style="height:25px; width: 150px; background-color:#dcdcdc;color: black; display:none;">Preconditions:</label>
             <ul id="allPreconditions"></ul>
 
 	    <!-- Testing Goal -->
@@ -137,19 +137,19 @@
         <div id="allTestSteps">
 	  <ul id="allSteps" style="color: black;"></ul>
         </div>
-        <button onclick="addEmptyStepForm()" id="addEmptyStep" style="height:25px; width: 150px; background-color:blue;color: white" >Add Test Step</button>
-        <button onclick="deleteStep()" id="deleteStep" style="height:25px; width: 150px; background-color:blue;color: white; visibility: hidden" >Delete Test Step</button>
+        <button onclick="addEmptyStepForm()" id="addEmptyStep" style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >Add Test Step</button>
+        <button onclick="deleteStep()" id="deleteStep" style="height:25px; width: 150px; background-color:#dcdcdc;color: black; visibility: hidden" >Delete Test Step</button>
         <br><br>
 	
         </div>
 
 	<div id="testCaseWritingDiv">
-          <button id="writeTestCases" onclick="writeTestCases()" style="height:30px; width: 500px; background-color:blue;color: white" >Create Test Cases!</button>
+          <button id="writeTestCases" onclick="writeTestCases()" style="height:30px; width: 500px; background-color:#dcdcdc;color: black" >Create Test Cases!</button>
           <br><br>
           <p id="tempDisplayArea"></p>
           <br><br>
-          <button id="exportTXT" onclick="exportToTXT()" style="display: none;height:25px; width: 150px; background-color:blue;color: white;" >Export to .txt</button>			
-		  <button id="exportCSV" onclick="exportToCSV()" style="display: none;height:25px; width: 150px; background-color:blue;color: white;" >Export to .csv</button>
+          <button id="exportTXT" onclick="exportToTXT()" style="display: none;height:25px; width: 150px; background-color:#dcdcdc;color: black;" >Export to .txt</button>			
+		  <button id="exportCSV" onclick="exportToCSV()" style="display: none;height:25px; width: 150px; background-color:#dcdcdc;color: black;" >Export to .csv</button>
 		</div>
 		
 	</div>
