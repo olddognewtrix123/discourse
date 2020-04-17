@@ -3,12 +3,12 @@
   "short_name": "Discourse",
   "icons": [
     {
-      "src": "https://github.com/olddognewtrix123/olddognewtrix123.github.io/tree/master/canoe-images/192_icon.png",
+      "src": "canoe-images/192_icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://github.com/olddognewtrix123/olddognewtrix123.github.io/tree/master/canoe-images/512_icon.png",
+      "src": "canoe-images/512_icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
