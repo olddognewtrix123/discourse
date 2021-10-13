@@ -16,7 +16,7 @@ var resultArr = [];
 let allNotes = [];
 
 function help(){
-  saveDataToObject(currentObject);
+  //saveDataToObject(currentObject);
   alert("Greetings fellow testers and anyone else tasked with creating test cases for software testing! \n \n  The Discourse Test Case Writer provides a simple tester's checklist for the parameters that a basic test case comprises. \n \n Load an existing set of test case parameters by clicking the Load Existing button and then select the test case. \n \n Begin a new test case by entering the particular requirement under test. Then enter the system roles that are affected by the requirement. \n \n Likewise, enter the preconditions that pertain to the requirement.\n \n State the goal of the test. This should be the final expected outcome of the test you are designing - it is not necessarily the same as the requirement. \n \n If the test case requires boundary values, selectd the type of data that represents the boundary values in the test case and enter the minimum and maximum boundary values. \n \n To complete the design of the test, start by entering a common user action, followed by the subsequent test steps. \n \n All but the very last test step entered will be given an expected outcome of 'Setup step.' \n \n The last user action that is entered as a test step will be assigned the test goal as its expected outcome. \n \n When writing test cases, enter '$N$' wherever the Discourse Test Case writer should insert the boundary condition into \n \n the test step. \n \n Finally, click the Create Test Cases button to save the test case parameters and see the completed test cases. \n \n Click the Export to CSV button to create an excel doc with the test case information provided in a comma-delimited format. ");									
 }
 
@@ -179,6 +179,7 @@ function populateTestSteps(arr){
     	  
       var deleteButtn1 = document.createElement("button");
       deleteButtn1.onclick = function() {
+          console.log("deleting step!");
 					  const index = arr.indexOf(usethisstep);
 					  if (index > -1) {
 					    arr.splice(index, 1);
@@ -267,17 +268,17 @@ function getCurrentSteps(){
   currentStepsArr = tempStepsArray;
 }
 
-function deleteStep(){
-
-}
+//function deleteStep(){
+// console.log("deleteStep got called!");
+//}
 
 // Miscellaneous functions begin here ********************************************************
 
-function resetUI(){
+ function resetUI(){
 
-}
+ }
 
-function toggleDataSavedMessage(){
+ function toggleDataSavedMessage(){
   var x = document.getElementById("dataSaveToggle");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -285,9 +286,9 @@ function toggleDataSavedMessage(){
   //else {
   //  x.style.display = "none";
   //}
-}
+ }
 
-function toggleShowData(){
+ function toggleShowData(){
   var x = document.getElementById("showdata");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -295,14 +296,14 @@ function toggleShowData(){
   else {
     x.style.display = "none";
   }
-}
+ }
 
-function displayAvailableTestCases(arr){
+ function displayAvailableTestCases(arr){
   // first, clear the list of child nodes
   var list = document.getElementById("allTests");  
   list.innerHTML = "";
 
- var list2 = document.getElementById("teststepdiv");
+  var list2 = document.getElementById("teststepdiv");
 
 
 
@@ -318,10 +319,10 @@ function displayAvailableTestCases(arr){
       li.appendChild(textnode);
       ul.appendChild(li);
     }
+   }
   }
-}
 
-function getRadioButtonSelected(){
+ function getRadioButtonSelected(){
   var radios = document.forms["radiobuttonsform"].elements["dataType"];
   for (var i = 0; i < radios.length; i++) {
     if (radios[i].type === 'radio' && radios[i].checked) {
@@ -333,10 +334,13 @@ function getRadioButtonSelected(){
   }
   else{document.getElementById("minmaxdiv").style.display = "block";}
   saveData();
-}
+ }
 
 
-// Test Case Writing ********************************************************
+// Test Case Writing **************************************************************************************************************************************************************************
+// Test Case Writing **************************************************************************************************************************************************************************
+// Test Case Writing **************************************************************************************************************************************************************************
+// Test Case Writing **************************************************************************************************************************************************************************
 
 function writeTestCases(){
   if(currentRolesArray.length==1){alert('There needs to be at least one Role defined.')}
@@ -367,46 +371,11 @@ function writeTestCases(){
 		
 		
 		
-		if(currentCheckedButton == dataTypeNone)
+		if(currentCheckedButton == "dataTypeNone")
+		
 		{
-			for(var p = 1; p<currentPreconditionsArray.length; p++){
-				statement = currentPreconditionsArray[p] + ";";
-				resultArr.push(statement);
-				statement = "System state precondition" + ";";
-				resultArr.push(statement);
-				
-		//  currentTestingGoal currentStepsArr
-		// currentCheckedButton  currentMinimumBoundaryValue  currentMaximumBoundaryValue 
-		
-				for(var s = 0; s<currentStepsArr.length; s++){
-	console.log(currentStepsArr.length);
-					if(currentStepsArr.length == 0){
-						alert('At lease one Test Step needs to be defined.');
-					}
-					else {
-						if(s==currentStepsArr.length-1){
-							statement = currentStepsArr[s] + "; ";
-							resultArr.push(statement);
-						
-							statement = currentTestingGoal + "; ";
-							resultArr.push(statement);
-						}
-						else{
-							statement = currentStepsArr[s] + "; ";
-							resultArr.push(statement);
-						
-							statement = "Setup step." + "; ";
-							resultArr.push(statement);
-						}
-					}
-				}
-			}
-		}
-		
-		else{ // one of the other data types was selected
-		
-		
-			
+		    console.log("dataTypeNone selected");
+		    
 			for(var p = 1; p<currentPreconditionsArray.length; p++){
 				var newstatement = currentPreconditionsArray[p] + ";";
 				newstatement2 = newstatement.replace('>&', currentMinimumBoundaryValue);
@@ -414,8 +383,7 @@ function writeTestCases(){
 				newstatement3 = "System state precondition" + ";";
 				resultArr.push(newstatement3);
 				
-		//  currentTestingGoal currentStepsArr
-		// currentCheckedButton  currentMinimumBoundaryValue  currentMaximumBoundaryValue 
+ 
 				
 				for(var s = 0; s<currentStepsArr.length; s++){
 				var newstatement4 = currentStepsArr[s];
@@ -441,16 +409,100 @@ function writeTestCases(){
 					}
 				}
 			}
-	
+		}
+		
+		else{ // one of the other data types was selected ***********************************************************************************
+			
+			for(var p = 1; p<currentPreconditionsArray.length; p++){
+				var newstatement = currentPreconditionsArray[p] + ";";
+				newstatement2 = newstatement.replace('>&', currentMinimumBoundaryValue);
+				resultArr.push(newstatement2);
+				newstatement3 = "System state precondition" + ";";
+				resultArr.push(newstatement3);
+				
+				for(var s = 0; s<currentStepsArr.length; s++){
+				var newstatement4 = currentStepsArr[s];
+				newstatement5 = newstatement4.replace('>&', currentMinimumBoundaryValue);
+					if(currentStepsArr.length == 0){
+						alert('At lease one Test Step needs to be defined.');
+					}
+					else {
+						if(s==currentStepsArr.length-1){
+							statement6 = newstatement5 + "; ";
+							resultArr.push(statement6);
+						
+							statement7 = currentTestingGoal + "; ";
+							resultArr.push(statement7);
+						}
+						else{
+							statement6 = newstatement5 + "; ";
+							resultArr.push(statement6);
+						
+							statement7 = "Setup step." + "; ";
+							resultArr.push(statement7);
+						}
+					}
+				}
+			}
+			
+			var min = currentMinimumBoundaryValue
+			var max = currentMaximumBoundaryValue
+			
+			var testVal = (max - min);
+			
+			if(testVal>1){
+			    min = Math.ceil(min);
+                max = Math.floor(max);
+                var middleVal = Math.floor(Math.random() * (max - min + 1)) + min;
+                
+                if(middleVal == min){
+                    middleVal = middleVal +1;
+                }
+                
+                if(middleVal == max){
+                    middleVal = middleVal -1;
+                }
+                
+                for(var p = 1; p<currentPreconditionsArray.length; p++){
+				var newstatement = currentPreconditionsArray[p] + ";";
+				newstatement2 = newstatement.replace('>&', middleVal);
+				resultArr.push(newstatement2);
+				newstatement3 = "System state precondition" + ";";
+				resultArr.push(newstatement3);
+				
+				for(var s = 0; s<currentStepsArr.length; s++){
+				var newstatement4 = currentStepsArr[s];
+				newstatement5 = newstatement4.replace('>&', middleVal);
+					if(currentStepsArr.length == 0){
+						alert('At lease one Test Step needs to be defined.');
+					}
+					else {
+						if(s==currentStepsArr.length-1){
+							statement6 = newstatement5 + "; ";
+							resultArr.push(statement6);
+						
+							statement7 = currentTestingGoal + "; ";
+							resultArr.push(statement7);
+						}
+						else{
+							statement6 = newstatement5 + "; ";
+							resultArr.push(statement6);
+						
+							statement7 = "Setup step." + "; ";
+							resultArr.push(statement7);
+						}
+					}
+				}
+			}
+                
+			}
+			
 			for(var p = 1; p<currentPreconditionsArray.length; p++){
 				var newstatement = currentPreconditionsArray[p] + ";";
 				newstatement2 = newstatement.replace('>&', currentMaximumBoundaryValue);
 				resultArr.push(newstatement2);
 				newstatement3 = "System state precondition" + ";";
 				resultArr.push(newstatement3);
-				
-		//  currentTestingGoal currentStepsArr
-		// currentCheckedButton  currentMinimumBoundaryValue  currentMaximumBoundaryValue 
 				
 				for(var s = 0; s<currentStepsArr.length; s++){
 				var newstatement4 = currentStepsArr[s];
@@ -475,7 +527,7 @@ function writeTestCases(){
 						}
 					}
 				}
-			}	
+			}
 		}
 	}
 
@@ -489,18 +541,25 @@ function writeTestCases(){
 			resultToText = resultToText + resultArr[x] + ' ';
 		}
 	}
+	
 	display.innerHTML = result;
+	
 	var x = document.getElementById("exportTXT");
-	if (x.style.display === "none") {
-    x.style.display = "block";
-	}
+	
+	  if (x.style.display === "none") {
+        x.style.display = "block";
+	  }
+	
 //	var y = document.getElementById("exportCSV");
-//	if (y.style.display === "none") {
-//    y.style.display = "block";
-//	}
+//	  if (y.style.display === "none") {
+  //      y.style.display = "block";
+	//  }
   }
 }
 
+
+// Export **************************************************************************************************************************************************************************
+// Export *******************************************************************************************************************************************************************
 
 function exportToTXT(){
 	//http://jsfiddle.net/UselessCode/qm5AG/
@@ -554,31 +613,35 @@ function download(strData, strFileName, strMimeType) {
     return true;
 }
 
-//function exportToCSV(){		//  https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-//	var exportArr = [];
-	//for(var y = 0; y<resultArr.length; y+2){
-	//	var z = y;
-	//	var subExportArr = [];
-	//	var pushme = resultArr[z];
-	//	subExportArr.push[pushme];
-	//	z++;
-	//	pushme = resultArr[z];
-	//	subExportArr.push[pushme];
-	//	exportArr.push[subExportArr];
-	//}
+ //function exportToCSV(){		//  https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+ //	var exportArr = [];
+//	 for(var y = 0; y<resultArr.length; y+2){
+//	 	var z = y;
+//	 	var subExportArr = [];
+//	 	var pushme = resultArr[z];
+//	 	subExportArr.push[pushme];
+//	 	z++;
+//	 	pushme = resultArr[z];
+//	 	subExportArr.push[pushme];
+//	 	exportArr.push[subExportArr];
+//	 }
 
-  //  let csvContent = "data:text/csv;charset=utf-8," + exportArr.map(e => e.join(",")).join("\n");
+ //    let csvContent = "data:text/csv;charset=utf-8," + exportArr.map(e => e.join(",")).join("\n");
 	
-//	var encodedUri = encodeURI(csvContent);
-//var link = document.createElement("a");
-//link.setAttribute("href", encodedUri);
-//link.setAttribute("download", "my_data.csv");
-//document.body.appendChild(link); // Required for FF
+ //	var encodedUri = encodeURI(csvContent);
+ //var link = document.createElement("a");
+// link.setAttribute("href", encodedUri);
+/// link.setAttribute("download", "my_data.csv");
+// document.body.appendChild(link); // Required for FF
 
-//link.click(); // This will download the data file named "my_data.csv".
-//}
+ //link.click(); // This will download the data file named "my_data.csv".
+ //}
 
 //*****************************  database stuff  ******************************************************************************
+//***************  database stuff  **************************  database stuff  **************************  database stuff  **************************  database stuff  ***********
+//***************  database stuff  **************************  database stuff  **************************  database stuff  **************************  database stuff  ***********
+//***************  database stuff  **************************  database stuff  **************************  database stuff  **************************  database stuff  ***********
+
 
 let db;
 let dbReq = indexedDB.open('DiscourseDatabase00',1);
@@ -770,7 +833,6 @@ function getAndDisplayNotes(){
 	alert('error in cursor request ' + event.target.errorCode);
     }
 }
-
 
 
 
